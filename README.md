@@ -1,1 +1,1 @@
-the source behind my personal website: [2λ.com](https://2λ.com)
+source for [2λ.com](https://2λ.com)
