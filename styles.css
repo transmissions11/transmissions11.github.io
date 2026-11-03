@@ -1,11 +1,12 @@
 :root {
   --red: #ba0017;
+  --pink: #fef2f4;
   --rule: #9a9a9a;
 }
 
 body {
   max-width: 760px;
-  margin: 64px auto 96px;
+  margin: 64px auto 1em;
   padding: 0 16px;
   background: #fff;
   color: #111;
@@ -120,6 +121,20 @@ li {
   margin: 0.1em 0;
 }
 
+/* Each post shows the favicon of the site it's on, in place of the bullet. */
+.writing {
+  list-style: none;
+  padding-left: 0;
+}
+
+.favicon {
+  width: 1em;
+  height: 1em;
+  margin-right: 0.45em;
+  vertical-align: -0.22em;
+  border-radius: 22%; /* rounded like browser tab icons */
+}
+
 .fn, .foot {
   color: var(--red);
 }
@@ -143,5 +158,87 @@ sup {
 }
 
 .foot p {
+  width: fit-content;
   margin: 0.2em 0;
+  transition: background-color 0.15s, box-shadow 0.15s;
+}
+
+/* Hovering a footnote or its number tints the note and underlines the number, as in the
+   zk-snarks writeup, to show which goes with which. */
+@media (hover: hover) {
+  .fn a:hover,
+  body:has(#fn-xi:hover) a[href="#fn-xi"],
+  body:has(#fn-2:hover) a[href="#fn-2"] {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .foot p:hover,
+  body:has(a[href="#fn-xi"]:hover) #fn-xi,
+  body:has(a[href="#fn-2"]:hover) #fn-2 {
+    background-color: var(--pink);
+    /* extends sideways only: the line height already pads it vertically */
+    box-shadow: 5px 0 0 var(--pink), -5px 0 0 var(--pink);
+  }
+}
+
+/* Phones: slightly smaller type, a narrower logo column, dates on their own line, and more
+   room between entries so the experience section doesn't read as one dense block. */
+@media (max-width: 600px) {
+  body {
+    margin: 22px auto 1em; /* puts the top of the name ~30px down, about twice the side margin */
+    font-size: 16px;
+  }
+
+  header {
+    row-gap: 8px; /* room between the name and the contact line once they stack */
+  }
+
+  h2 {
+    margin-top: 1.3em;
+  }
+
+  .role {
+    margin-bottom: 1.4em;
+    grid-template-columns: 28px 1fr;
+    column-gap: 12px;
+  }
+
+  .logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* with dates on their own line, entries without bullets are two lines, so keep the logo at the top */
+  .role:not(:has(ul)) {
+    align-items: start;
+  }
+
+  .rh {
+    display: block;
+    font-size: 1.05em;
+    line-height: 1.35;
+  }
+
+  .rh > i {
+    display: block;
+    margin-top: 0.1em;
+    font-size: 0.88em;
+    color: #6b6b6b;
+  }
+
+  .role ul {
+    grid-column: 1 / -1; /* full width, under the logo, rather than indented with the text */
+    margin-top: 0.5em;
+    padding-left: 1em;
+  }
+
+  .role li {
+    margin: 0.3em 0;
+    line-height: 1.45;
+  }
+
+  .writing li {
+    margin: 0.35em 0;
+  }
 }
