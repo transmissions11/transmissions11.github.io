@@ -135,15 +135,6 @@ li {
   border-radius: 22%; /* rounded like browser tab icons */
 }
 
-/* unpublished posts: greyed out, still clickable for the "coming soon" note */
-.writing .soon {
-  color: #666;
-}
-
-.writing .soon .favicon {
-  opacity: 0.65;
-}
-
 .fn, .foot {
   color: var(--red);
 }
